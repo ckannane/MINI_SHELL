@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:47:43 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/14 19:49:22 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:53:57 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_comadd_back(t_com **com, t_com *new)
 {
 	t_com	*end;
-	
+
 	if (com == NULL || new == NULL)
 		return ;
 	if (*com == NULL)

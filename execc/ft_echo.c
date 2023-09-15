@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:26:50 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/13 00:29:53 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:59:58 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	check_echo_flag(char	*str)
 	return 1;
 }
 
-
 void ft_echo(t_com *p)
 {
 	int i = 0;
@@ -41,11 +40,13 @@ void ft_echo(t_com *p)
 		return ;
 	if(p->arg[0] == NULL)
 		return;
-	if (check_echo_flag(p->arg[0]) == 1)
+	if (check_echo_flag(p->arg[0]) == 1 && ft_strcmp(p->arg[0],"-")!=0 )
 	{
 		fl = 1;
 		i++;
 	}
+	if(ft_strcmp(p->arg[0],"-") == 0)
+		i++;
 	while (p->arg[i])
 	{
 		j = 0;
@@ -56,9 +57,6 @@ void ft_echo(t_com *p)
 		}
 		while (p->arg[i][j])
 		{
-			//if(p->arg[i][j] == '\"' || p->arg[i][j] == '\'')
-			//	j++;
-			//else if(p->arg[i][j])
 			x = 1;
 			write(1,&p->arg[i][j++],1);
 		}

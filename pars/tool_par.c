@@ -6,49 +6,51 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:44:27 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 00:00:23 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/15 22:44:02 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int are_we_insid(char *str, int i) {
-    return (str[i] == '"' && (i == 0 || str[i - 1] != '\\')) ? 1 : 0;
-}
+char **splitString(const char *input) {
+    int i = 0;
+    char **result = NULL;
+    int token_start = 0;
+    int inside_double_quotes = 0;
+    int inside_single_quotes = 0;
 
-char *allocate_and_copy( char *str, int start, int end)
-{
-    int token_length = end - start;
-    char *token = (char *)malloc(sizeof(char) * (token_length + 1));
-    if (!token) {
-        perror("Memory allocation error");
-        exit(EXIT_FAILURE);
+    for (int j = 0; input[j] != '\0'; j++) {
+        if (input[j] == '|' && !inside_double_quotes && !inside_single_quotes) {
+            int token_len = j - token_start;
+            if (token_len > 0) {
+                result = realloc(result, (i + 1) * sizeof(char *));
+                result[i] = malloc(token_len + 1);
+                strncpy(result[i], &input[token_start], token_len);
+                result[i][token_len] = '\0';
+                i++;
+            }
+            token_start = j + 1;
+        } else if (input[j] == '"') {
+            inside_double_quotes = !inside_double_quotes;
+        } else if (input[j] == '\'') {
+            inside_single_quotes = !inside_single_quotes;
+        }
     }
 
-    strncpy(token, &str[start], token_length);
-    token[token_length] = '\0';
-    return token;
-}
+    int token_len = strlen(input) - token_start;
+    if (token_len > 0) {
+        result = realloc(result, (i + 1) * sizeof(char *));
+        result[i] = malloc(token_len + 1);
+        strncpy(result[i], &input[token_start], token_len);
+        result[i][token_len] = '\0';
+        i++;
+    }
 
-char **split_with_quotes(char *str, char c)
-{
-	char **tokens;
-	int slp_num = 0;
-	int i = 0;
-	int slp_go = 0;
-	int insid = 0;
-	int len = strlen(str);
-
-	tokens = (char **)malloc(sizeof(char *) * len);
-	while (i <= len) {
-	    if (are_we_insid(str, i)) {
-	        insid = !insid;
-	    } else if ((str[i] == c && !insid) || str[i] == '\0') {
-	        tokens[slp_num] = allocate_and_copy(str, slp_go, i);
-	        slp_num++;
-	        slp_go = i + 1;
-	    }
-	    i++;
-	}
-return tokens;
+    result = realloc(result, (i + 1) * sizeof(char *));
+    result[i] = NULL;
+    return result;
 }
+//hello | world = [hello] [world] [NULL]
+//hello | "world | hi" = [hello] ["world | hi"] [NULL]
+//hello = [hello] [NULL]
+//| NULL = [NULL]

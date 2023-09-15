@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:56:25 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 10:24:56 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:47:24 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,21 @@ char	*var_expand(t_com *sh, t_val *env)
 	return (res);
 }
 
-void	routine(char *str, int i,t_com *com, t_val *env)
+void	routine(char *str, int i,t_com *com, t_zid *zone)
 {
+	t_val	*current;
+
+	current = zone->env;
 	if (str[i] == '?')
 	{
 		com->var_len = 1;
-		com->var = ft_itoa(1);
-		//shell->exito = 0;
+		com->var = ft_itoa(zone->exito);
+		zone->exito = 0;
 	}
 	else
 	{
 		com->var = ft_substr(str, i, com->var_len);
-		com->var = var_expand(com, env);
+		com->var = var_expand(com, current);
 	}
 }
 

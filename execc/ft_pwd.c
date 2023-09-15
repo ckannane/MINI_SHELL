@@ -6,28 +6,24 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 10:07:29 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 10:28:35 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:57:16 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_pwd(t_val *env)
+void	ft_pwd(t_zid *zone)
 {
-	char *cwd = NULL;
+	t_val	*current;
 
-	cwd = getcwd(cwd, 0);
-	while(ft_strcmp(env->name, "PWD") != 0)
-		env = env -> next;
- 	if (cwd != NULL)
-	{
-		free(env->value);
-		env->value = ft_strdup(cwd);
-		printf("%s\n", env->value);
-	}
+	current = zone->env;
+	while(ft_strcmp(current->name, "PWD") != 0)
+		current = current -> next;
+ 	if (current -> next != NULL)
+		printf("%s\n", current->value);
 	else
 	{
-		perror("getcwd");
-		//shell->exito = 1;
+		perror("pwd");
+		zone->exito = 1;
 	}
 }
