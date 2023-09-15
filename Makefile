@@ -6,24 +6,26 @@
 #    By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 21:18:58 by ckannane          #+#    #+#              #
-#    Updated: 2023/09/12 16:34:30 by ckannane         ###   ########.fr        #
+#    Updated: 2023/09/15 00:09:01 by ckannane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
-SRC = pars/run.c pars/tools.c execc/ft_echo.c execc/ft_pwd.c execc/ft_cd.c execc/ft_export.c execc/ft_ls.c execc/env.c execc/unset.c execc/rederection.c
+SRC = pars/run.c pars/tools.c pars/tool_par.c pars/tool2.c pars/tool3.c execc/ft_echo.c execc/ft_pwd.c execc/ft_cd.c execc/ft_export.c execc/ft_ls.c execc/env.c execc/unset.c execc/rederection.c
 
 OBJ = $(SRC:.c=.o)
 
 NAME = minishell
 
+LDFLAGS = "-L/Users/ckannane/.brew/opt/readline/lib"
+
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-		$(CC) -L/goinfre/ckannane/homebrew/opt/readline/lib $(CFLAGS) $(OBJ) Libft/libft.a -lreadline -o $(NAME)
+		$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) Libft/libft.a -lreadline -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
