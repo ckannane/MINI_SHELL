@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:20:10 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 17:26:09 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:43:52 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*apply_exp(t_com *com, char *str, int i, t_zid *zone)
 	int		size;
 	char	*tmp1;
 	char	*tmp2;
+	char	*new;
 
 	size = i;
 	i++;
@@ -25,8 +26,10 @@ char	*apply_exp(t_com *com, char *str, int i, t_zid *zone)
 	com->var_len = count_var_size(str + i);
 	routine(str, i, com, zone);
 	tmp2 = str + (i + com->var_len);
-	str = ft_strjoin(ft_strjoin(tmp1, com->var), tmp2);
-	return (str);
+	new = ft_strjoin(ft_strjoin(tmp1, com->var), tmp2);
+	free(str);
+	free(com->var);
+	return (new);
 }
 
 char	*expd(t_com *com, char *str, t_zid	*zone)
@@ -73,6 +76,7 @@ char	*expansion(t_com *com, t_zid *zone, char *line)
 		command = expd(com, com->sp[i], zone);
 		res = ft_strjoin(command, " ");
 		hold = ft_strjoin(hold, res);
+		free(command);
 		free(res);
 		i++;
 	}

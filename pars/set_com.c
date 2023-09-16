@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:42:39 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 13:09:45 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:45:57 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*redirection_split(char *input)
 	j = 0;
 	len = ft_strlen(input);
 	result = fill_the_red(len, i, j, input);
+	free(input);
 	return (result);
 }
 

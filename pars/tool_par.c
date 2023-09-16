@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:44:27 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 17:59:57 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:23:50 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	**splitstring(char *input)
 	result = ft_realloc(result, val->i * sizeof(char *), \
 	(val->i + 1) * sizeof(char *));
 	result[val->i] = NULL;
+	free(val);
 	return (result);
 }
 
@@ -86,6 +87,7 @@ void	read_com(t_com *com, t_zid *zone, char *line)
 	tmp = return_without_quote(tmp);
 	tmp = redirection_split(tmp);
 	com->slp = ft_split(tmp, ' ');
+	free(tmp);
 	if (com->slp[0] == NULL)
 		return ;
 	com->commad = set_command(com->slp);

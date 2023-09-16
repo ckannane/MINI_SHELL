@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:07:17 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 19:46:14 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:33:52 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_cd(t_com *com, t_zid *zone);
 t_com	*ft_comlast(t_com *com);
 char	**pas_env(t_val *env);
 char	**get_path(char *command, t_val *env);
-char	*ft_strjoin_env(char const *s1, char const *s2);
+char	*ft_strjoin_env(char *s1, char *s2);
 void	ft_comadd_back(t_com **com, t_com *new);
 char	*expansion(t_com *com, t_zid *zone, char *line);
 int		check_quote(char *line);
@@ -131,4 +131,5 @@ int		looking_for_her(char **slp);
 char	*detect_file(char **spl);
 int		search_for_redirection(t_com *com);
 int		check_val(t_val *zone, char *content);
+void	free_double(char **target);
 #endif

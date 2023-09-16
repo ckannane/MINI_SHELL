@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:56:25 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 17:28:15 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:42:46 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*var_expand(t_com *sh, t_val *env)
 		res = ft_strdup(env->value);
 	else
 		res = ft_strdup("");
+	free(sh->var);
 	return (res);
 }
 

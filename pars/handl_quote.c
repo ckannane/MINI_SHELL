@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:43 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 12:22:37 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:20:07 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ char	*return_without_quote(char *str)
 		i++;
 	}
 	result = fill_the_quotes(str, curr_char, curr, res);
+	free(str);
 	return (result);
 }
 
 char	*set_command(char **slp)
 {
-	int	i;
-
+	int		i;
+	char	*str;
 	i = 0;
 	if (slp == NULL)
 		return (ft_strdup(""));
@@ -81,7 +82,11 @@ char	*set_command(char **slp)
 		if (slp[2] == NULL)
 			return (NULL);
 		else
-			return (ft_strdup(return_without_quote(slp[2])));
+		{
+			str = ft_strdup(slp[2]);
+			return (ft_strdup(return_without_quote(str)));
+		}
 	}
-	return (ft_strdup(return_without_quote(slp[0])));
+	str = ft_strdup(slp[0]);
+	return (ft_strdup(return_without_quote(str)));
 }

@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:47:43 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 14:53:57 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:31:04 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_comadd_back(t_com **com, t_com *new)
 	new->next = NULL;
 }
 
-char	*ft_strjoin_env(char const *s1, char const *s2)
+char	*ft_strjoin_env(char *s1, char  *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -54,6 +54,7 @@ char	*ft_strjoin_env(char const *s1, char const *s2)
 	while (s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
+	free(s1);
 	return (str);
 }
 

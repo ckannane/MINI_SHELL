@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:12:46 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 17:33:36 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:34:07 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	search_path(t_val *env)
 void	acces(char *com, char **all_com, char **env_set)
 {
 	execve(com, all_com, env_set);
+	free_double(env_set);
 	perror("execve");
 	exit(126);
 }

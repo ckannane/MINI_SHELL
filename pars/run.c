@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:08:59 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 13:18:39 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:35:43 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	track_com(char *line, t_zid *zone, t_com *com)
 	all = splitstring(line);
 	if (all[0] == NULL)
 		return ;
+	com = NULL;
 	while (all[i])
 	{
 		index = ft_comnew(all[i++]);
@@ -74,7 +75,6 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	com = malloc(sizeof(t_com));
 	zone = lets_start(env);
-	com = NULL;
 	while (1)
 	{
 		signal(SIGINT, siginthandler);
@@ -86,9 +86,9 @@ int	main(int ac, char **av, char **env)
 		{
 			track_com(line, zone, com);
 			add_history(line);
+			free(line);
 		}
-		free_t_com_list(com);
-		free(line);
 	}
+		//free_t_com_list(com);
 	return (0);
 }
