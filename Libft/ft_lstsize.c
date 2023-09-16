@@ -6,11 +6,11 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 22:19:42 by ckannane          #+#    #+#             */
-/*   Updated: 2023/02/24 15:25:49 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:43:24 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 int	ft_lstsize(t_list *lst)
 {

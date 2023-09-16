@@ -6,11 +6,11 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 01:01:27 by ckannane          #+#    #+#             */
-/*   Updated: 2022/10/15 11:13:25 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:42:38 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {

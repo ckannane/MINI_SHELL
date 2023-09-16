@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:56:25 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 16:47:24 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 17:28:15 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*var_expand(t_com *sh, t_val *env)
 	return (res);
 }
 
-void	routine(char *str, int i,t_com *com, t_zid *zone)
+void	routine(char *str, int i, t_com *com, t_zid *zone)
 {
 	t_val	*current;
 

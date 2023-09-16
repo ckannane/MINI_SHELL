@@ -6,13 +6,13 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:43 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 19:16:24 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:22:37 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*fill_the_quotes(char *str,char curr_char, char curr, int res)
+char	*fill_the_quotes(char *str, char curr_char, char curr, int res)
 {
 	char	*result;
 	int		i;
@@ -60,7 +60,7 @@ char	*return_without_quote(char *str)
 		}
 		i++;
 	}
-	result = fill_the_quotes(str,curr_char,curr,res);
+	result = fill_the_quotes(str, curr_char, curr, res);
 	return (result);
 }
 
@@ -70,15 +70,16 @@ char	*set_command(char **slp)
 
 	i = 0;
 	if (slp == NULL)
-	        return (ft_strdup(""));
-	if ((ft_strcmp(slp[0], ">") == 0 || ft_strcmp(slp[0], ">>") == 0
-	|| ft_strcmp(slp[0], "<") == 0 || ft_strcmp(slp[0], "<<") == 0) && slp[1] == NULL)
-	        return (NULL);
-	if ((ft_strcmp(slp[0], ">") == 0 || ft_strcmp(slp[0], ">>") == 0
+		return (ft_strdup(""));
+	if ((ft_strcmp(slp[0], ">") == 0 || ft_strcmp(slp[0], ">>") == 0 \
+	|| ft_strcmp(slp[0], "<") == 0 || ft_strcmp(slp[0], "<<") == 0) && \
+	slp[1] == NULL)
+		return (NULL);
+	if ((ft_strcmp(slp[0], ">") == 0 || ft_strcmp(slp[0], ">>") == 0 \
 	|| ft_strcmp(slp[0], "<") == 0 || ft_strcmp(slp[0], "<<") == 0))
 	{
 		if (slp[2] == NULL)
-	        return (NULL);
+			return (NULL);
 		else
 			return (ft_strdup(return_without_quote(slp[2])));
 	}

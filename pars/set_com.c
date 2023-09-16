@@ -6,60 +6,70 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:42:39 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 23:39:19 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:09:45 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int isSymbol(char c)
+int	issymbol(char c)
 {
-    return (c == '<' || c == '>');
+	return (c == '<' || c == '>');
 }
 
-char	*redirection_split(char* input)
+char	*fill_the_red(int len, int i, int j, char *input)
 {
-	int len;
-	int i = 0;
-	int j = 0;
-	char c_tmp;
+	char	c_tmp;
 	char	*result;
 
-	len = strlen(input);
-	result = (char*)malloc((2 * len + 1) * sizeof(char));
+	result = malloc((2 * len + 1) * sizeof(char));
 	while (i < len)
 	{
-	    c_tmp = input[i];
-	    if (isSymbol(c_tmp))
+		c_tmp = input[i];
+		if (issymbol(c_tmp))
 		{
-	        result[j++] = ' ';
-	        result[j++] = c_tmp;
-	        if (i < len - 1 && isSymbol(input[i + 1]))
-	            result[j++] = input[i++ + 1];
-	        result[j++] = ' ';
-	    }
+			result[j++] = ' ';
+			result[j++] = c_tmp;
+			if (i < len - 1 && issymbol(input[i + 1]))
+				result[j++] = input[i++ + 1];
+			result[j++] = ' ';
+		}
 		else
-	        result[j++] = c_tmp;
-	    i++;
+			result[j++] = c_tmp;
+		i++;
 	}
 	result[j] = '\0';
 	return (result);
 }
 
-int		set_arg_size(t_com *com)
+char	*redirection_split(char *input)
 {
-	int i;
+	int		len;
+	int		i;
+	int		j;
+	char	*result;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(input);
+	result = fill_the_red(len, i, j, input);
+	return (result);
+}
+
+int	set_arg_size(t_com *com)
+{
+	int	i;
 	int	num_args;
 
 	i = 0;
 	num_args = 0;
 	if ((ft_strcmp(com->slp[0], "<<") == 0) || \
-	(ft_strcmp(com->slp[0],"<") == 0))
+	(ft_strcmp(com->slp[0], "<") == 0))
 		i = i + 2;
 	while (com->slp[i])
 	{
 		if ((ft_strcmp(com->slp[i], ">") == 0 || \
-		ft_strcmp(com->slp[i],">>") == 0 || ft_strcmp(com->slp[i], "<") == 0 \
+		ft_strcmp(com->slp[i], ">>") == 0 || ft_strcmp(com->slp[i], "<") == 0 \
 		|| ft_strcmp(com->slp[i], "<<") == 0))
 			break ;
 		num_args++;
@@ -91,25 +101,4 @@ void	install_arg(t_com *com, int num_args)
 		j++;
 	}
 	com->after_red[j] = NULL;
-}
-
-void	read_com(t_com *com, t_zid *zone, char *line)
-{
-	char	*tmp;
-	int		num_args;
-
-	com->sp = ft_split(com->word, ' ');
-	tmp = expansion(com ,zone, line);
-	tmp = return_without_quote(tmp);
-	tmp = redirection_split(tmp);
-	com->slp = ft_split(tmp, ' ');
-	if (com->slp[0] == NULL)
-		return ;
-	com->commad = set_command(com->slp);
-	if (com->commad == NULL)
-		return ;
-	num_args = set_arg_size(com);
-	if (num_args == 0)
-		return ;
-	install_arg(com, num_args);
 }

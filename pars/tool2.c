@@ -6,35 +6,11 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:53:42 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 20:05:01 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 17:28:02 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	*expansion(t_com *com, t_zid *zone, char *line)
-{
-	int		i;
-	char	*res;
-	char	*hold;
-	char	*command;
-
-	res = ft_strdup("");
-	hold = ft_strdup("");
-	command = malloc(ft_strlen(line));
-	com->sq = 0;
-	com->dq = 0;
-	i = 0;
-	while (com->sp[i])
-	{
-		command = expd(com, com->sp[i], zone);
-		res = ft_strjoin(command, " ");
-		hold = ft_strjoin(hold, res);
-		free(res);
-		i++;
-	}
-	return (hold);
-}
 
 int	check_quote(char *line)
 {
@@ -77,44 +53,38 @@ t_com	*ft_comnew(char *line)
 	com->next = NULL;
 	return (com);
 }
-char	*apply_exp(t_com *com ,char *str, int i, t_zid *zone)
-{
-	int		size;
-	char	*tmp1;
-	char	*tmp2;
 
-	size = i;
-	i++;
-	com->var_len = 0;
-	tmp1 = ft_substr(str, 0, size);
-	com->var_len = count_var_size(str + i);
-	routine(str, i, com, zone);
-	tmp2 = str + (i + com->var_len);
-	str = ft_strjoin(ft_strjoin(tmp1, com->var), tmp2);
-	return (str);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
+{
+	void	*new_ptr;
+
+	if (new_size == 0)
+		return (NULL);
+	if (ptr == NULL)
+		return (malloc(new_size));
+	if (new_size <= old_size)
+		return (ptr);
+	new_ptr = malloc(new_size);
+	if (new_ptr == NULL)
+		return (NULL);
+	ft_memcpy(new_ptr, ptr, old_size);
+	return (new_ptr);
 }
-char	*expd(t_com *com ,char *str, t_zid	*zone)
-{
-	int		i;
-	int		is_double;
-	int		is_single;
 
-	is_double = 0;
-	is_single = 0;
-	com->var = ft_strdup("");
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int	i;
+
 	i = 0;
-	while (str[i])
+	while (src[i] != '\0' && i < n)
 	{
-		if (str[i] == '\'' && !(is_double))
-			is_single = !(is_single);
-		if (str[i] == '"' && !(is_double))
-			is_double = !(is_double);
-		if (str[i] == '$' && str[i + 1] != '\0' && !(is_single))
-		{
-			str = apply_exp(com, str, i, zone);
-			i = 0;
-		}
+		dest[i] = src[i];
+		++i;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
 		i++;
 	}
-	return (str);
+	return (dest);
 }

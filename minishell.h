@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:07:17 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/15 23:17:08 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:46:14 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ typedef struct s_zid
 	int		exito;
 }t_zid;
 
+typedef struct s_slp_p
+{
+	int		i;
+	int		start;
+	int		in_d;
+	int		in_s;
+	int		j;
+	int		slp_len;
+}t_slp_p;
 
 void	rl_replace_line(const char *text, int clear_undo);
 char	**split_arg(char *str);
@@ -74,7 +83,7 @@ void	apply_fd(t_com *com);
 void	sigintHandler(int signum);
 int		vip_command_check(t_com *com);
 void	exe_builtins(t_com *com, t_zid *zone);
-void	execute_command(t_com *com ,t_zid *zone);
+void	execute_command(t_com *com, t_zid *zone);
 void	ft_cd(t_com *com, t_zid *zone);
 t_com	*ft_comlast(t_com *com);
 char	**pas_env(t_val *env);
@@ -85,8 +94,8 @@ char	*expansion(t_com *com, t_zid *zone, char *line);
 int		check_quote(char *line);
 int		ft_strcmp(char *s1, char *s2);
 t_com	*ft_comnew(char *line);
-char	*expd(t_com *com ,char *str, t_zid	*zone);
-void	routine(char *str, int i,t_com *com, t_zid *zone);
+char	*expd(t_com *com, char *str, t_zid	*zone);
+void	routine(char *str, int i, t_com *com, t_zid *zone);
 char	*var_expand(t_com *sh, t_val *env);
 int		count_var_size(char *str);
 int		check_q(char *str);
@@ -94,7 +103,32 @@ char	**split_with_quotes(char *str, char c, int slp_num, int slp_go);
 char	*return_without_quote(char *str);
 char	*set_command(char **slp);
 void	read_com(t_com *com, t_zid *zone, char *line);
-char 	**splitString(const char *input);
-void free_t_com_list(t_com *head);
-//char **split_pro_string(const char *input);
+char	**splitstring(char *input);
+void	free_t_com_list(t_com *head);
+void	run_child(t_com *com, t_zid *zone, int	*fid);
+void	in_the_verse(t_zid *zone, int status, pid_t child_pid);
+void	run_parent(pid_t child_pid, int status, int *fid, t_zid *zone);
+void	exe_with_fork(t_zid *zone, t_com *com);
+void	turn_on(t_com *com, t_zid *zone);
+void	intial_com(t_com *com, t_zid *zone, char *line);
+int		how_much_com(t_com *com);
+int		vip_command_check(t_com *com);
+void	exe_builtins(t_com *com, t_zid *zone);
+void	start_the_exe(t_zid *zone, t_com *com);
+void	execute_command(t_com *com, t_zid *zone);
+void	launch_execve(t_com *com, t_zid *zone, char **env_set, int i);
+void	acces(char *com, char **all_com, char **env_set);
+int		search_path(t_val *env);
+int		my_access(const char *path, int mode);
+void	install_arg(t_com *com, int num_args);
+int		set_arg_size(t_com *com);
+char	*redirection_split(char *input);
+char	*fill_the_red(int len, int i, int j, char *input);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void	sigcheck(int sig);
+int		looking_for_her(char **slp);
+char	*detect_file(char **spl);
+int		search_for_redirection(t_com *com);
+int		check_val(t_val *zone, char *content);
 #endif

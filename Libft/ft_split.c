@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:38:53 by ckannane          #+#    #+#             */
-/*   Updated: 2022/10/19 17:55:18 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:43:43 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static size_t	start(size_t p, char const *s, char c, size_t l)
 			x++;
 		if (x == p)
 			break ;
-	i++;
+		i++;
 	}
 	return (i - l + 1);
 }
