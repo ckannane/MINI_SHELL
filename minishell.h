@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:07:17 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:33:52 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:51:53 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,11 @@ typedef struct s_zid
 
 typedef struct s_slp_p
 {
-	int		i;
-	int		start;
-	int		in_d;
-	int		in_s;
-	int		j;
-	int		slp_len;
+	int	initialCapacity;
+	int	wordCount;
+	int	insideQuotes;
+	int	wordStart;
+	int	i;
 }t_slp_p;
 
 void	rl_replace_line(const char *text, int clear_undo);
@@ -104,7 +103,7 @@ char	*return_without_quote(char *str);
 char	*set_command(char **slp);
 void	read_com(t_com *com, t_zid *zone, char *line);
 char	**splitstring(char *input);
-void	free_t_com_list(t_com *head);
+void	free_t_com_list(t_com  *head);
 void	run_child(t_com *com, t_zid *zone, int	*fid);
 void	in_the_verse(t_zid *zone, int status, pid_t child_pid);
 void	run_parent(pid_t child_pid, int status, int *fid, t_zid *zone);
@@ -119,7 +118,7 @@ void	execute_command(t_com *com, t_zid *zone);
 void	launch_execve(t_com *com, t_zid *zone, char **env_set, int i);
 void	acces(char *com, char **all_com, char **env_set);
 int		search_path(t_val *env);
-int		my_access(const char *path, int mode);
+int		my_access(char *path, int mode);
 void	install_arg(t_com *com, int num_args);
 int		set_arg_size(t_com *com);
 char	*redirection_split(char *input);
@@ -132,4 +131,5 @@ char	*detect_file(char **spl);
 int		search_for_redirection(t_com *com);
 int		check_val(t_val *zone, char *content);
 void	free_double(char **target);
+void	ft_exit(t_com *com, t_zid *zone);
 #endif

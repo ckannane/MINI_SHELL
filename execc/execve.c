@@ -6,13 +6,13 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:12:46 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:34:07 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/17 22:26:06 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	my_access(const char *path, int mode)
+int	my_access(char *path, int mode)
 {
 	if (access(path, mode) == 0)
 		return (0);
@@ -83,4 +83,5 @@ void	execute_command(t_com *com, t_zid *zone)
 	}
 	else
 		perror("fork");
+	free_double(env_set);
 }

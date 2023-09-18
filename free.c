@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:23:07 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 19:39:38 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:21:05 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,29 @@ void	free_double(char **target)
 	}
 	free(target);
 }
+void	free_t_val_list(t_val *head)
+{
+	t_val	*temp;
 
-void	free_t_com_list(t_com *head)
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp->content);
+		free(temp->name);
+		free(temp->value);
+		free(temp);
+	}
+}
+
+void	free_zone(t_zid *zone)
+{
+	free_t_val_list(zone->env);
+	free_t_val_list(zone->exp);
+	free(zone);
+}
+
+void	free_t_com_list(t_com  *head)
 {
 	t_com	*temp;
 
@@ -43,7 +64,5 @@ void	free_t_com_list(t_com *head)
 			free_double(temp->sp);
 		free(temp->word);
 		free(temp->commad);
-		free(temp->var);
-		free(temp);
 	}
 }

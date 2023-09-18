@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:01:07 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:26:41 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:05:41 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	exe_with_fork(t_zid *zone, t_com *com)
 		com = com->next;
 	}
 	in_the_verse(zone, status, child_pid);
-	dup2(stdi, 1);
-	dup2(stdo, 0);
+	dup2(stdi, 0);
+	dup2(stdo, 1);
 	free(fid);
 }

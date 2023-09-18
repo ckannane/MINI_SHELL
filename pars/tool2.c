@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:53:42 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 17:28:02 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:53:26 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_com	*ft_comnew(char *line)
 	com = (t_com *)malloc(sizeof(t_com));
 	if (!com)
 		return (0);
-	com->word = line;
+	com->word = ft_strdup(line);
 	com->next = NULL;
 	return (com);
 }

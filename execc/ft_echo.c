@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:26:50 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 17:41:31 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:49:51 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	ft_echo(t_com *p)
 	i = 0;
 	j = 0;
 	fl = 0;
+	if (p->arg[0] == NULL)
+	{
+		write(1, "\n", 1);
+		return ;
+	}
 	if (ft_strcmp(p->commad, "echo") != 0)
 		return ;
 	if (p->arg == NULL)

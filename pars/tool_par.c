@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:44:27 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:23:50 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:32:47 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,72 +17,66 @@ t_slp_p	*init_slp_p(void)
 	t_slp_p	*val;
 
 	val = malloc(sizeof(t_slp_p));
+	val->initialCapacity = 10;
+	val->wordCount = 0;
+	val->insideQuotes = 0;
+	val->wordStart = 0;
 	val->i = 0;
-	val->start = 0;
-	val->in_d = 0;
-	val->in_s = 0;
-	val->slp_len = 0;
-	val->j = 0;
 	return (val);
 }
-
-void	tokenize_input(char *input, t_slp_p *val, char ***result)
+void	fill_it(t_slp_p	*val, char* word, char *input, char** words)
 {
-	while (input[val->j] != '\0')
+	if (val->i > val->wordStart)
 	{
-		if (input[val->j] == '|' && !val->in_d && !val->in_s)
+		word = (char*)malloc(val->i - val->wordStart + 1);
+		ft_strncpy(word, input + val->wordStart, val->i - val->wordStart);
+		word[val->i - val->wordStart] = '\0';
+		words[val->wordCount++] = word;
+		if (val->wordCount == val->initialCapacity)
 		{
-			val->slp_len = val->j - val->start;
-			if (val->slp_len > 0)
-			{
-				*result = ft_realloc(result, val->i * sizeof(char *), \
-				(val->i + 1) * sizeof(char *));
-				(*result)[val->i] = malloc(val->slp_len + 1);
-				ft_strncpy((*result)[val->i], &input[val->start], val->slp_len);
-				(*result)[val->i][val->slp_len] = '\0';
-				val->i++;
-			}
-			val->start = val->j + 1;
+			val->initialCapacity *= 2;
+			words = (char**)realloc(words, val->initialCapacity * sizeof(char*));
 		}
-		else if (input[val->j] == '"')
-			val->in_d = !val->in_d;
-		else if (input[val->j] == '\'')
-			val->in_s = !val->in_s;
-		val->j++;
 	}
+	val->wordStart = val->i + 1;
 }
+
 
 char	**splitstring(char *input)
 {
 	t_slp_p	*val;
-	char	**result;
+	char*	word;
+	char**	words;
 
+	word = NULL;
 	val = init_slp_p();
-	result = NULL;
-	tokenize_input(input, val, &result);
-	val->slp_len = ft_strlen(input) - val->start;
-	if (val->slp_len > 0)
+	words = (char**)malloc(val->initialCapacity * sizeof(char*));
+	while (input[val->i] != '\0')
 	{
-		result = ft_realloc(result, val->i * sizeof(char *), \
-		(val->i + 1) * sizeof(char *));
-		result[val->i] = malloc(val->slp_len + 1);
-		ft_strncpy(result[val->i], &input[val->start], val->slp_len);
-		result[val->i][val->slp_len] = '\0';
+		if (input[val->i] == '"')
+			val->insideQuotes = !val->insideQuotes;
+		else if (input[val->i] == '|' && !val->insideQuotes)
+			fill_it(val, word, input, words);
 		val->i++;
 	}
-	result = ft_realloc(result, val->i * sizeof(char *), \
-	(val->i + 1) * sizeof(char *));
-	result[val->i] = NULL;
+	if (val->i > val->wordStart)
+	{
+		word = (char*)malloc(val->i - val->wordStart + 1);
+		ft_strncpy(word, input + val->wordStart, val->i - val->wordStart);
+		word[val->i - val->wordStart] = '\0';
+		words[val->wordCount++] = word;
+	}
+	words[val->wordCount] = NULL;
 	free(val);
-	return (result);
+	return (words);
 }
-
 void	read_com(t_com *com, t_zid *zone, char *line)
 {
 	char	*tmp;
 	int		num_args;
 
 	com->sp = ft_split(com->word, ' ');
+	free(com->word);
 	tmp = expansion(com, zone, line);
 	tmp = return_without_quote(tmp);
 	tmp = redirection_split(tmp);

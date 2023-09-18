@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:20:10 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:43:52 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:51:48 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*apply_exp(t_com *com, char *str, int i, t_zid *zone)
 	tmp1 = ft_substr(str, 0, size);
 	com->var_len = count_var_size(str + i);
 	routine(str, i, com, zone);
-	tmp2 = str + (i + com->var_len);
+	tmp2 = ft_strdup(str + (i + com->var_len));
 	new = ft_strjoin(ft_strjoin(tmp1, com->var), tmp2);
 	free(str);
-	free(com->var);
+	free(tmp2);
 	return (new);
 }
 
@@ -55,6 +55,7 @@ char	*expd(t_com *com, char *str, t_zid	*zone)
 		}
 		i++;
 	}
+	free(com->var);
 	return (str);
 }
 
@@ -65,20 +66,47 @@ char	*expansion(t_com *com, t_zid *zone, char *line)
 	char	*hold;
 	char	*command;
 
-	res = ft_strdup("");
+	res = NULL;
 	hold = ft_strdup("");
 	command = malloc(ft_strlen(line));
-	com->sq = 0;
-	com->dq = 0;
 	i = 0;
 	while (com->sp[i])
 	{
 		command = expd(com, com->sp[i], zone);
 		res = ft_strjoin(command, " ");
 		hold = ft_strjoin(hold, res);
-		free(command);
 		free(res);
 		i++;
 	}
 	return (hold);
+}
+int	check_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] > '9' || str[i] < '0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	ft_exit(t_com *com, t_zid *zone)
+{
+	if (com->arg[0] == NULL)
+		exit(zone->exito);
+	else if (com->arg[0] != NULL && check_digit(com->arg[0]) \
+	&& com->arg[1] == NULL)
+		exit(ft_atoi(com->arg[0]));
+	else if (check_digit(com->arg[0]) == 0)
+	{
+		printf("exit, %s not numeric",com->arg[0]);
+		exit(255);
+	}
+	else if (check_digit(com->arg[0]) && check_digit(com->arg[1]) \
+	&& com->arg[1] != NULL)
+		printf("too many args");
 }

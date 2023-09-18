@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:45:17 by ckannane          #+#    #+#             */
-/*   Updated: 2022/10/15 20:29:38 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/17 08:38:40 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char	*s, int c);
 char	*ft_strdup(const char *s1);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char	*dst, const char	*src, size_t	dstsize);
 size_t	ft_strlen(const char	*c);

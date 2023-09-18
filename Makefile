@@ -6,13 +6,13 @@
 #    By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 21:18:58 by ckannane          #+#    #+#              #
-#    Updated: 2023/09/16 22:21:48 by ckannane         ###   ########.fr        #
+#    Updated: 2023/09/18 10:23:45 by ckannane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror
 
 
 SRC =	pars/run.c pars/tools.c pars/tool_par.c \

@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:08:41 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 12:46:48 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:51:59 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	exe_builtins(t_com *com, t_zid *zone)
 		ft_cd(com, zone);
 	else if (ft_strcmp(com->commad, "pwd") == 0)
 		ft_pwd(zone);
-	else if (ft_strcmp(com->commad, "echo") == 0 && com->arg != NULL)
+	else if (ft_strcmp(com->commad, "echo") == 0)
 		ft_echo(com);
 	else if (ft_strcmp(com->commad, "export") == 0)
 		ft_export(com, zone);
 	else if (ft_strcmp(com->commad, "unset") == 0)
 		ft_unset(com, zone);
 	else if (ft_strcmp(com->commad, "exit") == 0)
-		exit(0);
+		ft_exit(com, zone);
 	else if (ft_strcmp(com->commad, "env") == 0)
 	{
 		while (current)

@@ -6,13 +6,13 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:08:59 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:35:43 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:02:24 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	track_com(char *line, t_zid *zone, t_com *com)
+void	track_com(char *line, __unused t_zid *zone, __unused t_com *com)
 {
 	char	**all;
 	int		i;
@@ -36,6 +36,7 @@ void	track_com(char *line, t_zid *zone, t_com *com)
 	}
 	intial_com(com, zone, line);
 	start_the_exe(zone, com);
+	free_double(all);
 }
 
 void	siginthandler(int signum)
@@ -86,9 +87,9 @@ int	main(int ac, char **av, char **env)
 		{
 			track_com(line, zone, com);
 			add_history(line);
-			free(line);
+			free_t_com_list(com);
 		}
+		free(line);
 	}
-		//free_t_com_list(com);
 	return (0);
 }
