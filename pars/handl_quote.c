@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:49:43 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/18 12:55:48 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:30:43 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*set_command(char **slp)
 {
 	int		i;
 	char	*str;
+
 	i = 0;
 	if (slp == NULL)
 		return (ft_strdup(""));

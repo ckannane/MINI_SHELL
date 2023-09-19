@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:07:17 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/18 18:51:53 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:38:00 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ typedef struct s_zid
 
 typedef struct s_slp_p
 {
-	int	initialCapacity;
-	int	wordCount;
-	int	insideQuotes;
-	int	wordStart;
+	int	initial_capacity;
+	int	word_count;
+	int	inside_quotes;
+	int	word_start;
 	int	i;
 }t_slp_p;
 
@@ -89,7 +89,7 @@ char	**pas_env(t_val *env);
 char	**get_path(char *command, t_val *env);
 char	*ft_strjoin_env(char *s1, char *s2);
 void	ft_comadd_back(t_com **com, t_com *new);
-char	*expansion(t_com *com, t_zid *zone, char *line);
+char	*expansion(t_com *com, t_zid *zone);
 int		check_quote(char *line);
 int		ft_strcmp(char *s1, char *s2);
 t_com	*ft_comnew(char *line);
@@ -103,7 +103,7 @@ char	*return_without_quote(char *str);
 char	*set_command(char **slp);
 void	read_com(t_com *com, t_zid *zone, char *line);
 char	**splitstring(char *input);
-void	free_t_com_list(t_com  *head);
+void	free_t_com_list(t_com *head);
 void	run_child(t_com *com, t_zid *zone, int	*fid);
 void	in_the_verse(t_zid *zone, int status, pid_t child_pid);
 void	run_parent(pid_t child_pid, int status, int *fid, t_zid *zone);
@@ -132,4 +132,5 @@ int		search_for_redirection(t_com *com);
 int		check_val(t_val *zone, char *content);
 void	free_double(char **target);
 void	ft_exit(t_com *com, t_zid *zone);
+char	**ft_splito(char *str);
 #endif

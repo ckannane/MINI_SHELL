@@ -6,7 +6,7 @@
 #    By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 21:18:58 by ckannane          #+#    #+#              #
-#    Updated: 2023/09/18 10:23:45 by ckannane         ###   ########.fr        #
+#    Updated: 2023/09/20 00:24:43 by ckannane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 
 SRC =	pars/run.c pars/tools.c pars/tool_par.c \
-		pars/tool2.c pars/tool3.c pars/parsing_com.c pars/expd.c\
+		pars/tool2.c pars/tool3.c pars/tool4.c pars/parsing_com.c pars/expd.c\
 		execc/ft_echo.c \
 		execc/ft_pwd.c execc/ft_cd.c execc/ft_export.c \
 		execc/env.c execc/unset.c execc/red_tool.c \

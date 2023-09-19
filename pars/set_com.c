@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:42:39 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:45:57 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:54:59 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*fill_the_red(int len, int i, int j, char *input)
 	char	c_tmp;
 	char	*result;
 
-	result = malloc((2 * len + 1) * sizeof(char));
+	result = ft_calloc(2 * len + 1, 1);
 	while (i < len)
 	{
 		c_tmp = input[i];

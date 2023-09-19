@@ -6,13 +6,13 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:08:59 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/18 18:02:24 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:20:45 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	track_com(char *line, __unused t_zid *zone, __unused t_com *com)
+void	track_com(char *line, t_zid *zone, t_com *com)
 {
 	char	**all;
 	int		i;
@@ -36,6 +36,7 @@ void	track_com(char *line, __unused t_zid *zone, __unused t_com *com)
 	}
 	intial_com(com, zone, line);
 	start_the_exe(zone, com);
+	free_t_com_list(com);
 	free_double(all);
 }
 
@@ -74,8 +75,8 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	com = malloc(sizeof(t_com));
 	zone = lets_start(env);
+	com = malloc(sizeof(t_com));
 	while (1)
 	{
 		signal(SIGINT, siginthandler);
@@ -87,9 +88,8 @@ int	main(int ac, char **av, char **env)
 		{
 			track_com(line, zone, com);
 			add_history(line);
-			free_t_com_list(com);
+			free(line);
 		}
-		free(line);
 	}
 	return (0);
 }

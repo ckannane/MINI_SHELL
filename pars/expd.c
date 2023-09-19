@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:20:10 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/18 18:51:48 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:29:55 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*expd(t_com *com, char *str, t_zid	*zone)
 	return (str);
 }
 
-char	*expansion(t_com *com, t_zid *zone, char *line)
+char	*expansion(t_com *com, t_zid *zone)
 {
 	int		i;
 	char	*res;
@@ -67,8 +67,10 @@ char	*expansion(t_com *com, t_zid *zone, char *line)
 	char	*command;
 
 	res = NULL;
+	command = NULL;
 	hold = ft_strdup("");
-	command = malloc(ft_strlen(line));
+	if (command)
+		command = ft_strdup("");
 	i = 0;
 	while (com->sp[i])
 	{
@@ -80,12 +82,13 @@ char	*expansion(t_com *com, t_zid *zone, char *line)
 	}
 	return (hold);
 }
+
 int	check_digit(char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] > '9' || str[i] < '0')
 			return (0);
@@ -103,7 +106,7 @@ void	ft_exit(t_com *com, t_zid *zone)
 		exit(ft_atoi(com->arg[0]));
 	else if (check_digit(com->arg[0]) == 0)
 	{
-		printf("exit, %s not numeric",com->arg[0]);
+		printf("exit, %s not numeric", com->arg[0]);
 		exit(255);
 	}
 	else if (check_digit(com->arg[0]) && check_digit(com->arg[1]) \

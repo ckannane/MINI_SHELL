@@ -6,13 +6,13 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 12:45:44 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/18 10:41:39 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:10:37 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*s2;
 	int		s1len;
