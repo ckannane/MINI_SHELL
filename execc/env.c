@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:03:00 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 22:09:29 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:29:58 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ t_val	*ft_val_re_new(char*content)
 	if (!node)
 		return (0);
 	node -> content = content;
-	node->name = save_before_equal (node -> content);
-	node->value = save_after_equal (node -> content);
+	node->name = save_before_equal (content);
+	node->value = save_after_equal (content);
 	node -> next = NULL;
 	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:07:17 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 00:38:00 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:06:57 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,7 @@ int		check_val(t_val *zone, char *content);
 void	free_double(char **target);
 void	ft_exit(t_com *com, t_zid *zone);
 char	**ft_splito(char *str);
+void	free_zone(t_zid *zone);
+t_slp_p	*init_slp_p(void);
+void	fill_it(t_slp_p	*val, char *word, char *input, char **words);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:22:21 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 00:23:59 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:39:37 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,63 +17,49 @@ int	ft_isspace(char c)
 	return (c == ' ' || c == '\n' || c == '\t');
 }
 
-int	count_words(char *str)
+void	fill_them(t_slp_p	*val, char *word, char *input, char **words)
 {
-	int	count;
-
-	count = 0;
-	while (*str)
+	if (val->i > val->word_start)
 	{
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
+		word = (char *)malloc(val->i - val->word_start + 1);
+		ft_strncpy(word, input + val->word_start, val->i - val->word_start);
+		word[val->i - val->word_start] = '\0';
+		words[val->word_count++] = word;
+		if (val->word_count == val->initial_capacity)
 		{
-			count++;
-			while (*str && !ft_isspace(*str))
-				str++;
+			val->initial_capacity *= 2;
+			words = (char **)realloc(words, val->initial_capacity * \
+			sizeof(char *));
 		}
 	}
-	return (count);
-}
-
-char	*malloc_word(char *str)
-{
-	char	*word;
-	int		i;
-
-	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
-		i++;
-	word = (char *)malloc(sizeof(char) * (i + 1));
-	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
-	{
-		word[i] = str[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
+	val->word_start = val->i + 1;
 }
 
 char	**ft_splito(char *str)
 {
-	char	**arr;
-	int		i;
+	t_slp_p	*val;
+	char	*word;
+	char	**words;
 
-	arr = (char **)malloc(sizeof(char *) * (count_words(str) + 1));
-	i = 0;
-	while (*str)
+	word = NULL;
+	val = init_slp_p();
+	words = (char **)malloc(val->initial_capacity * sizeof(char *));
+	while (str[val->i] != '\0')
 	{
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
-		{
-			arr[i] = malloc_word(str);
-			i++;
-			while (*str && !ft_isspace(*str))
-				str++;
-		}
+		if (str[val->i] == '"')
+			val->inside_quotes = !val->inside_quotes;
+		else if (ft_isspace(str[val->i]) && !val->inside_quotes)
+			fill_them(val, word, str, words);
+		val->i++;
 	}
-	arr[i] = NULL;
-	return (arr);
+	if (val->i > val->word_start)
+	{
+		word = (char *)malloc(val->i - val->word_start + 1);
+		ft_strncpy(word, str + val->word_start, val->i - val->word_start);
+		word[val->i - val->word_start] = '\0';
+		words[val->word_count++] = word;
+	}
+	words[val->word_count] = NULL;
+	free(val);
+	return (words);
 }

@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:28:19 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 19:45:55 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:34:51 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	check_val(t_val *zone, char *content)
 		}
 		zone = zone->next;
 	}
+	free(name);
+	free(value);
 	return (1);
 }
 

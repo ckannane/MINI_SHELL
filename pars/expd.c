@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:20:10 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 00:29:55 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:47:12 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*expd(t_com *com, char *str, t_zid	*zone)
 
 	is_double = 0;
 	is_single = 0;
-	com->var = ft_strdup("");
+	com->var = NULL;
 	i = 0;
 	while (str[i])
 	{

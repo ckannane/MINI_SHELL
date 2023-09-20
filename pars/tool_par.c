@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:44:27 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 00:38:32 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:02:53 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ char	**splitstring(char *input)
 	free(val);
 	return (words);
 }
+void	re_shap_slp(char **slp)
+{
+	int	i;
+
+	i = 0;
+	while(slp[i])
+	{
+		slp[i] = return_without_quote(slp[i]);
+		i++;
+	}
+}
+
 
 void	read_com(t_com *com, t_zid *zone, char __unused *line)
 {
@@ -79,9 +91,9 @@ void	read_com(t_com *com, t_zid *zone, char __unused *line)
 
 	com->sp = ft_split(com->word, ' ');
 	tmp = expansion(com, zone);
-	tmp = return_without_quote(tmp);
 	tmp = redirection_split(tmp);
 	com->slp = ft_splito(tmp);
+	re_shap_slp(com->slp);
 	free(tmp);
 	if (com->slp[0] == NULL)
 		return ;

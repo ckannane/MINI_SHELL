@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:08:59 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 00:20:45 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 10:48:05 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,24 @@ int	main(int ac, char **av, char **env)
 	t_zid	*zone;
 	t_com	*com;
 
-	(void)ac;
 	(void)av;
-	zone = lets_start(env);
-	com = malloc(sizeof(t_com));
-	while (1)
+	if (ac == 1)
 	{
-		signal(SIGINT, siginthandler);
-		signal(SIGQUIT, siginthandler);
-		line = readline("[minishell] $> ");
-		if (line == NULL)
-			break ;
-		if (*line)
+		zone = lets_start(env);
+		com = malloc(sizeof(t_com));
+		while (1)
 		{
-			track_com(line, zone, com);
-			add_history(line);
-			free(line);
+			signal(SIGINT, siginthandler);
+			signal(SIGQUIT, siginthandler);
+			line = readline("[minishell] $> ");
+			if (line == NULL)
+				break ;
+			if (*line)
+			{
+				track_com(line, zone, com);
+				add_history(line);
+				free(line);
+			}
 		}
 	}
 	return (0);

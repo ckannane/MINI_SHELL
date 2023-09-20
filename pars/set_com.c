@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:42:39 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/18 21:54:59 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:22:05 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*fill_the_red(int len, int i, int j, char *input)
 	while (i < len)
 	{
 		c_tmp = input[i];
-		if (issymbol(c_tmp))
+		
+		if (issymbol(c_tmp) && (input[i + 1] != ' ' && input[i - 1] != ' '))
 		{
 			result[j++] = ' ';
 			result[j++] = c_tmp;

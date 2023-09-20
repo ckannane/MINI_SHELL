@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:30:39 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/18 20:46:36 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:36:20 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,6 @@ void	ft_cd(t_com *com, t_zid *zone)
 		zone->exito = 1;
 	}
 	apply_cd(pwd_path, oldpwd_path, zone);
+	free(oldpwd_path);
+	free(pwd_path);
 }
