@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 10:05:00 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/16 19:48:17 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/21 01:14:25 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	delete_val(t_val **head, char *str)
 		current = current->next;
 	}
 	if (current == NULL)
-	{
-		printf("nor found\n");
 		return ;
-	}
 	pre->next = current->next;
 	free(current);
 }
@@ -45,8 +42,11 @@ void	ft_unset(t_com *com, t_zid *zone)
 	i = 0;
 	while (com->arg[i])
 	{
-		delete_val(&zone->env, com->arg[i]);
-		delete_val(&zone->exp, com->arg[i]);
+		if (ft_strcmp(com->arg[i], "_"))
+		{
+			delete_val(&zone->exp, com->arg[i]);
+			delete_val(&zone->env, com->arg[i]);
+		}
 		i++;
 	}
 }

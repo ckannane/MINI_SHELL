@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:53:42 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/19 17:49:16 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:45:49 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_quote(char *line)
 	while (line[i])
 	{
 		if ((line[i] == '"' || line[i] == '\'') && flag == 0)
-			flag = line[i++];
+			flag = line[i];
 		else if (line[i] == flag && flag)
 			flag = 0;
 		i++;

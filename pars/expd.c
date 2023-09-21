@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:20:10 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 13:47:12 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:46:22 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*expd(t_com *com, char *str, t_zid	*zone)
 	is_single = 0;
 	com->var = NULL;
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == '\'' && !(is_double))
 			is_single = !(is_single);
@@ -55,7 +55,8 @@ char	*expd(t_com *com, char *str, t_zid	*zone)
 		}
 		i++;
 	}
-	free(com->var);
+	if (com->var)
+		free(com->var);
 	return (str);
 }
 

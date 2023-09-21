@@ -6,7 +6,7 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:28:19 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 12:34:51 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:44:12 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ int	check_val(t_val *zone, char *content)
 			return (0);
 		if (ft_strcmp(zone->name, name) == 0)
 		{
-			free(zone->value);
-			zone->value = ft_strdup(value);
+			if (value != NULL)
+			{
+				free(zone->value);
+				zone->value = ft_strdup(value);
+			}
 			return (0);
 		}
 		zone = zone->next;

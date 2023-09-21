@@ -6,13 +6,13 @@
 #    By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 21:18:58 by ckannane          #+#    #+#              #
-#    Updated: 2023/09/20 00:24:43 by ckannane         ###   ########.fr        #
+#    Updated: 2023/09/21 01:51:19 by ckannane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 
 SRC =	pars/run.c pars/tools.c pars/tool_par.c \

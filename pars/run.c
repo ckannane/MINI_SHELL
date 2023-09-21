@@ -6,11 +6,40 @@
 /*   By: ckannane <ckannane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:08:59 by ckannane          #+#    #+#             */
-/*   Updated: 2023/09/20 10:48:05 by ckannane         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:53:01 by ckannane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	check_the_line(char *str)
+{
+	int	i;
+	int	n;
+	int	j;
+
+	n = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '|')
+		{
+			n = 1;
+			j = i;
+			while (str[++j])
+			{
+				if (str[j] != ' ' && str[j] != '\t' && \
+				str[j] != '\0' && str[j] != '|')
+				{
+					n = 0;
+					break ;
+				}
+			}
+		}
+		i++;
+	}
+	return (n);
+}
 
 void	track_com(char *line, t_zid *zone, t_com *com)
 {
@@ -18,7 +47,7 @@ void	track_com(char *line, t_zid *zone, t_com *com)
 	int		i;
 	t_com	*index;
 
-	if (check_quote(line))
+	if (check_quote(line) || check_the_line(line))
 	{
 		zone->exito = 1;
 		ft_putstr_fd("Syntax error\n", 2);
@@ -89,8 +118,8 @@ int	main(int ac, char **av, char **env)
 			{
 				track_com(line, zone, com);
 				add_history(line);
-				free(line);
 			}
+			free(line);
 		}
 	}
 	return (0);
